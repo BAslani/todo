@@ -11,19 +11,21 @@ const Home = () => {
   return (
     <Wrapper>
       <Navbar />
-      {
-        tasks.map((task) => {
-          return <Task key={task.id} {...task} />
-        })
-      }
-      <div className="btn-container">
-        <button className="add-btn" type='button'>
-          <BsFillPlusCircleFill />
-        </button>
-        <button type="button" className="sort-btn">
-          <BsSortDownAlt />
-        </button>
-      </div>
+      <main className='tasks-container'>
+        {
+          tasks.map((task) => {
+            return <Task key={task.id} {...task} />
+          })
+        }
+        <div className="btn-container">
+          <button className="add-btn" type='button'>
+            <BsFillPlusCircleFill />
+          </button>
+          <button type="button" className="sort-btn">
+            <BsSortDownAlt />
+          </button>
+        </div>
+      </main>
     </Wrapper>
   )
 }
