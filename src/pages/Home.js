@@ -1,6 +1,5 @@
 import React from 'react'
 import Navbar from '../components/Navbar'
-import Sidebar from '../components/Sidebar'
 import Task from '../components/Task'
 import styled from 'styled-components'
 import { useGlobal } from '../context/context'
