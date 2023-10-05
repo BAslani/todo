@@ -33,10 +33,10 @@ const Wrapper = styled.main`
 height: 100vh;
 display: grid;
 grid-template-rows: auto 1fr auto;
-overflow-x: scroll;
 
 .tasks-container {
   background: #eee;
+  overflow-x: scroll;
 }
 .footer {
   height: 9rem;
