@@ -1,4 +1,4 @@
-export default [
+const tasks = [
     {
         id: 1,
         desc: "Dentist at 17:00",
@@ -62,7 +62,9 @@ export default [
     {
         id: 11,
         desc: "buy birthday gift",
-        date: "4/10/2023",
+        date: "8/10/2023",
         priority: 1
-    },
+    }
 ]
+
+export default tasks;
