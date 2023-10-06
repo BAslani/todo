@@ -2,15 +2,17 @@ import React from 'react'
 import styled from 'styled-components'
 import { BsPersonCircle } from 'react-icons/bs'
 import { FaBars } from 'react-icons/fa6'
+import { useGlobal } from '../context/context'
 
 const Navbar = () => {
+  const { setIsSidebarOpen } = useGlobal()
   return (
     <Wrapper>
       <div className="user">
-        <BsPersonCircle className='avatar'/>
+        <BsPersonCircle className='avatar' />
         <h5>username</h5>
       </div>
-      <button className="toggle-btn">
+      <button className="toggle-btn" onClick={() => setIsSidebarOpen(true)}>
         <FaBars />
       </button>
     </Wrapper>
@@ -33,6 +35,7 @@ box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
   background: transparent;
   border: none;
   color: #fff;
+  cursor: pointer;
 }
 .user h5 {
   color: #fff;

@@ -2,12 +2,15 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 import { FaTimes } from 'react-icons/fa'
 import styled from 'styled-components'
+import { useGlobal } from '../context/context'
 
 const Sidebar = () => {
+  const { isSidebarOpen, setIsSidebarOpen } = useGlobal()
+
   return <SidebarContainer>
-    <aside className="sidebar">
+    <aside className={`sidebar ${isSidebarOpen && 'show-sidebar'}`}>
       <div className="sidebar-header">
-        <button type="button" className="close-btn">
+        <button type="button" className="close-btn" onClick={() => setIsSidebarOpen(false)}>
           <FaTimes />
         </button>
       </div>

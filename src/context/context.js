@@ -5,9 +5,12 @@ const todoContext = React.createContext();
 
 const TodoProvider = ({ children }) => {
     const [tasks, setTasks] = useState(mockData)
+    const [isSidebarOpen, setIsSidebarOpen] = useState(false)
 
     return <todoContext.Provider value={{
-        tasks
+        tasks,
+        isSidebarOpen,
+        setIsSidebarOpen
     }}>
         {children}
     </todoContext.Provider>
