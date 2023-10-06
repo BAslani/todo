@@ -13,10 +13,10 @@ const Sidebar = () => {
       </div>
       <ul className="links">
         <li>
-          <Link to="/" >Completed</Link>
+          <Link to="/" >Home</Link>
         </li>
         <li>
-          <Link to="/" >Failed</Link>
+          <Link to="/" >Previous tasks</Link>
         </li>
         <li>
           <button type="button" className="logout-btn">Logout</button>
