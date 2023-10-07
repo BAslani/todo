@@ -1,5 +1,4 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
 import { FaTimes } from 'react-icons/fa'
 import styled from 'styled-components'
 import { useGlobal } from '../context/context'
@@ -14,12 +13,19 @@ const Sidebar = () => {
           <FaTimes />
         </button>
       </div>
+      <h3>Filter by :</h3>
       <ul className="links">
         <li>
-          <Link to="/" >Home</Link>
+          <button type="button" className="sidebar-btn">Events</button>
         </li>
         <li>
-          <button type="button" className="logout-btn">Logout</button>
+          <button type="button" className="sidebar-btn">Work</button>
+        </li>
+        <li>
+          <button type="button" className="sidebar-btn">Educations</button>
+        </li>
+        <li>
+          <button type="button" className="sidebar-btn">Chores</button>
         </li>
       </ul>
     </aside>
@@ -28,6 +34,7 @@ const Sidebar = () => {
 
 const SidebarContainer = styled.div`
   text-align: center;
+
   .sidebar-header {
     display: flex;
     justify-content: space-between;
@@ -51,28 +58,7 @@ const SidebarContainer = styled.div`
     justify-self: center;
     height: 45px;
   }
-  .links {
-    margin-bottom: 2rem;
-  }
-  .links a {
-    display: block;
-    text-align: left;
-    font-size: 1rem;
-    text-transform: capitalize;
-    padding: 1rem 1.5rem;
-    color: var(--clr-grey-3);
-    transition: var(--transition);
-    letter-spacing: var(--spacing);
-  }
-
-  .links a:hover {
-    padding: 1rem 1.5rem;
-    padding-left: 2rem;
-    background: var(--clr-grey-10);
-    color: var(--clr-grey-2);
-  }
-
-  .logout-btn {
+  .sidebar-btn {
     width: 100vw;
     cursor: pointer;
     display: block;
@@ -86,14 +72,12 @@ const SidebarContainer = styled.div`
     transition: var(--transition);
     letter-spacing: var(--spacing);
   }
-
-  .logout-btn: hover {
+  .sidebar-btn: hover {
     padding: 1rem 1.5rem;
     padding-left: 2rem;
     background: var(--clr-grey-10);
     color: var(--clr-grey-2);
   }
-
   .sidebar {
     position: fixed;
     top: 0;

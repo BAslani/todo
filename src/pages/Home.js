@@ -7,7 +7,7 @@ import { BsFillPlusCircleFill, BsSortDownAlt } from 'react-icons/bs'
 import Modal from '../components/Modal'
 
 const Home = () => {
-  const { tasks, isModalOpen, setIsModalOpen } = useGlobal()
+  const { tasks, isModalOpen, setIsModalOpen, setIsSidebarOpen } = useGlobal()
   return (
     <Wrapper>
       {isModalOpen && <Modal />}
@@ -23,7 +23,7 @@ const Home = () => {
         <button className="add-btn" type='button' onClick={() => setIsModalOpen(true)}>
           <BsFillPlusCircleFill />
         </button>
-        <button type="button" className="sort-btn">
+        <button type="button" className="sort-btn" onClick={() => setIsSidebarOpen(true)}>
           <BsSortDownAlt />
         </button>
       </section>

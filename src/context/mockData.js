@@ -2,68 +2,68 @@ const tasks = [
     {
         id: 1,
         desc: "Dentist at 17:00",
-        date: "3/10/2023",
-        priority: 1
+        date: "8/10/2023",
+        type: "event"
     },
     {
         id: 2,
         desc: "Submit the course project",
-        date: "3/10/2023",
-        priority: 2
+        date: "8/10/2023",
+        type: "education"
     },
     {
         id: 3,
         desc: "Set a meeting",
-        date: "4/10/2023",
-        priority: 1
+        date: "9/10/2023",
+        type: "work"
     },
     {
         id: 4,
         desc: "Grocery shopping",
-        date: "4/10/2023",
-        priority: 3
+        date: "9/10/2023",
+        type: "chores"
     },
     {
         id: 5,
         desc: "Laundry",
-        date: "5/10/2023",
-        priority: 3
+        date: "10/10/2023",
+        type: "chores"
     },
     {
         id: 6,
         desc: "Portfolio",
-        date: "5/10/2023",
-        priority: 3
+        date: "10/10/2023",
+        type: "work"
     },
     {
         id: 7,
         desc: "update my resume",
-        date: "5/10/2023",
-        priority: 3
+        date: "10/10/2023",
+        type: "work"
     },
     {
         id: 8,
         desc: "buy a new cellphone",
-        date: "6/10/2023",
-        priority: 3
+        date: "11/10/2023",
+        type: "chores"
     },
     {
         id: 9,
         desc: "change the remote batteries",
-        date: "6/10/2023",
-        priority: 1
+        date: "11/10/2023",
+        type: "chores"
     },
     {
         id: 10,
         desc: "carwash",
-        date: "7/10/2023",
-        priority: 1
+        date: "12/10/2023",
+        type: "chores"
     },
     {
         id: 11,
         desc: "buy birthday gift",
-        date: "8/10/2023",
-        priority: 1
+        date: "13/10/2023",
+        type: "event"
     }
 ]
 

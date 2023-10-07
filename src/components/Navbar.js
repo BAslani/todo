@@ -1,19 +1,17 @@
 import React from 'react'
 import styled from 'styled-components'
 import { BsPersonCircle } from 'react-icons/bs'
-import { FaBars } from 'react-icons/fa6'
-import { useGlobal } from '../context/context'
+import { TbLogout } from 'react-icons/tb'
 
 const Navbar = () => {
-  const { setIsSidebarOpen } = useGlobal()
   return (
     <Wrapper>
       <div className="user">
         <BsPersonCircle className='avatar' />
         <h5>username</h5>
       </div>
-      <button className="toggle-btn" onClick={() => setIsSidebarOpen(true)}>
-        <FaBars />
+      <button className="logout-btn">
+        <TbLogout />
       </button>
     </Wrapper>
   )
@@ -30,7 +28,7 @@ box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
 .avatar {
   font-size: 3rem;
 }
-.toggle-btn {
+.logout-btn {
   font-size: 3rem;
   background: transparent;
   border: none;
