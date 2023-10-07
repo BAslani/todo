@@ -4,11 +4,13 @@ import Task from '../components/Task'
 import styled from 'styled-components'
 import { useGlobal } from '../context/context'
 import { BsFillPlusCircleFill, BsSortDownAlt } from 'react-icons/bs'
+import Modal from '../components/Modal'
 
 const Home = () => {
-  const { tasks } = useGlobal()
+  const { tasks, isModalOpen, setIsModalOpen } = useGlobal()
   return (
     <Wrapper>
+      {isModalOpen && <Modal />}
       <Navbar />
       <section className='tasks-container'>
         {
@@ -18,7 +20,7 @@ const Home = () => {
         }
       </section>
       <section className="footer">
-        <button className="add-btn" type='button'>
+        <button className="add-btn" type='button' onClick={() => setIsModalOpen(true)}>
           <BsFillPlusCircleFill />
         </button>
         <button type="button" className="sort-btn">
@@ -51,6 +53,7 @@ grid-template-rows: auto 1fr auto;
   font-size: 5rem;
   color: #3E9FBD;
   filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
+  cursor: pointer;
 }
 .sort-btn {
   background: transparent;
