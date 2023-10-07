@@ -19,9 +19,6 @@ const Sidebar = () => {
           <Link to="/" >Home</Link>
         </li>
         <li>
-          <Link to="/" >Previous tasks</Link>
-        </li>
-        <li>
           <button type="button" className="logout-btn">Logout</button>
         </li>
       </ul>
