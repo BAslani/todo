@@ -37,15 +37,15 @@ const tasks = [
     },
     {
         id: 7,
-        desc: "update my resume",
-        date: "10/10/2023",
-        type: "work"
+        desc: "buy birthday gift",
+        date: "13/10/2023",
+        type: "event"
     },
     {
         id: 8,
-        desc: "buy a new cellphone",
+        desc: "review course content",
         date: "11/10/2023",
-        type: "chores"
+        type: "education"
     },
     {
         id: 9,
@@ -61,10 +61,10 @@ const tasks = [
     },
     {
         id: 11,
-        desc: "buy birthday gift",
-        date: "13/10/2023",
-        type: "event"
-    }
+        desc: "update my resume",
+        date: "10/10/2023",
+        type: "work"
+    },
 ]
 
 export default tasks;
