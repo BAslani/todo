@@ -2,10 +2,10 @@ import React from 'react'
 import styled from 'styled-components'
 import { BiEditAlt, BiCheckbox } from 'react-icons/bi'
 
-const Task = ({ id, desc, date, priority }) => {
+const Task = ({ id, desc, date, type }) => {
   return (
     <Wrapper>
-      <span className="dot"></span>
+      <span className={`dot ${type}`}></span>
       <h5>
         {desc}
       </h5>
@@ -40,12 +40,23 @@ h5 {
 .dot {
   height: 1rem;
   width: 1rem;
-  background: #ff3d00;
   border-radius: 50%;
   display: inline-block;
   margin: auto;
   margin-left: 0.75rem;
   margin-right: 0.75rem
+}
+.event {
+  background: #ff3d00;
+}
+.work {
+  background: #707070;
+}
+.education {
+  background: #124c85;
+}
+.chores {
+  background: #4caf50;
 }
 .btn-container {
   display: flex;
