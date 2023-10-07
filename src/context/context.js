@@ -8,12 +8,17 @@ const TodoProvider = ({ children }) => {
     const [isSidebarOpen, setIsSidebarOpen] = useState(false)
     const [isModalOpen, setIsModalOpen] = useState(false)
 
+    const handleSubmit = (e) => {
+        e.preventDefault();
+    }
+
     return <todoContext.Provider value={{
         tasks,
         isSidebarOpen,
         setIsSidebarOpen,
         isModalOpen,
-        setIsModalOpen
+        setIsModalOpen,
+        handleSubmit
     }}>
         {children}
     </todoContext.Provider>

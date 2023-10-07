@@ -61,6 +61,7 @@ grid-template-rows: auto 1fr auto;
   font-size: 5rem;
   color: #747474;
   filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
+  cursor: pointer;
 }
 `
 

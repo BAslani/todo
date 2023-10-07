@@ -2,26 +2,37 @@ import styled from "styled-components";
 import { useGlobal } from "../context/context";
 
 const Modal = () => {
-    const { setIsModalOpen } = useGlobal();
+    const { setIsModalOpen, handleSubmit } = useGlobal();
+
     return (
         <Wrapper>
             <div className='modal'>
-                <h4>Modal</h4>
-                <div className='btn-container'>
-                    <button
-                        type='button'
-                        className='btn confirm-btn'
-                    >
-                        confirm
-                    </button>
-                    <button
-                        type='button'
-                        className='btn clear-btn'
-                        onClick={() => setIsModalOpen(false)}
-                    >
-                        cancel
-                    </button>
-                </div>
+                <form onSubmit={handleSubmit}>
+                    <input type="text" name="desc" placeholder='Task' />
+                    <input type="date" name="date" />
+                    <select name="type" defaultValue="title">
+                        <option disabled value="title">Type</option>
+                        <option value="event">Event</option>
+                        <option value="work">Work</option>
+                        <option value="education">Education</option>
+                        <option value="chores">Chores</option>
+                    </select>
+                    <div className='btn-container'>
+                        <button
+                            type='submit'
+                            className='btn confirm-btn'
+                        >
+                            confirm
+                        </button>
+                        <button
+                            type='button'
+                            className='btn clear-btn'
+                            onClick={() => setIsModalOpen(false)}
+                        >
+                            cancel
+                        </button>
+                    </div>
+                </form>
             </div>
         </Wrapper>
     );
@@ -58,6 +69,21 @@ line-height: 1.5;
 .btn-container {
   display: flex;
   justify-content: space-around;
+}
+form {
+    display: flex;
+    flex-direction: column;
+    max-width: 300px;
+    margin: 0 auto;
+  }
+input,
+select {
+  padding: 10px;
+  margin-bottom: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 16px;
+  outline: none;
 }
 `
 
