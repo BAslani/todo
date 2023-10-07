@@ -22,7 +22,7 @@ const Task = ({ id, desc, date, type }) => {
 }
 
 const Wrapper = styled.article`
-width: 80vw;
+width: 80%;
 margin: 1rem auto;
 background: #fff;
 border-radius: 1rem;
