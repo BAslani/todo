@@ -1,9 +1,8 @@
 import React from 'react'
 import styled from 'styled-components'
-import { Link } from 'react-router-dom'
 
 
-const Login = () => {
+const Register = () => {
   const handleSubmit = (e) => {
     e.preventDefault()
   }
@@ -23,16 +22,13 @@ const Login = () => {
           <input type="text" placeholder='Username' className="form-control" />
         </div>
         <div>
-          <input type="password" placeholder='password' className="form-control" />
+          <input type="password" placeholder='Password' className="form-control" />
         </div>
-        <button className="btn" type='submit'>Login</button>
+        <div>
+          <input type="password" placeholder='Confirm Password' className="form-control" />
+        </div>
+        <button className="btn" type='submit'>sign up</button>
       </form>
-      <div className='redirect'>
-        <h5>If you don't have an account</h5>
-        <Link to='/register'>
-          <h4>sign up</h4>
-        </Link>
-      </div>
     </Wrapper>
   )
 }
@@ -68,10 +64,6 @@ form {
   border-radius: 0.75rem;
   padding: 0.75rem 2rem;
 }
-.redirect {
-  margin-top: 3rem;
-  text-align: center;
-}
 `
 
-export default Login
+export default Register;

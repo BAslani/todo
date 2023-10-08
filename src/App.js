@@ -4,6 +4,7 @@ import Home from './pages/Home'
 import Login from './pages/Login'
 import Error from './pages/Error'
 import Sidebar from './components/Sidebar'
+import Register from './pages/Register'
 
 const App = () => {
   return (
@@ -12,6 +13,7 @@ const App = () => {
       <Routes>
         <Route path='/' element={ <Home />} />
         <Route path='/login' element={ <Login />} />
+        <Route path='/register' element={ <Register />} />
         <Route path='*' element={ <Error />} />
       </Routes>
     </BrowserRouter>
