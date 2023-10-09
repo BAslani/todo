@@ -1,10 +1,42 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 import styled from 'styled-components'
 
 
 const Register = () => {
-  const handleSubmit = (e) => {
-    e.preventDefault()
+  const navigate = useNavigate()
+  const [formData, setFormData] = useState({
+    username: '',
+    password: '',
+    confirmPassword: '',
+  });
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    if (formData.password !== formData.confirmPassword) {
+      alert('Passwords do not match');
+      return;
+    }
+    try {
+      const response = await fetch('http://127.0.0.1:5000/register', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
+      });
+
+      if (response.status === 200) {
+        alert('Registration successful');
+        navigate('/')
+      } else {
+        alert('Registration failed');
+      }
+    } catch (error) {
+      console.error('Error:', error);
+      alert('An error occurred');
+    }
   }
   return (
     <Wrapper>
@@ -19,13 +51,40 @@ const Register = () => {
       </header>
       <form onSubmit={handleSubmit}>
         <div>
-          <input type="text" placeholder='Username' className="form-control" />
+          <input
+            type="text"
+            placeholder='Username'
+            className="form-control"
+            name='username'
+            value={formData.username}
+            onChange={(e) => {
+              setFormData({ ...formData, username: e.target.value })
+            }}
+          />
         </div>
         <div>
-          <input type="password" placeholder='Password' className="form-control" />
+          <input
+            type="password"
+            placeholder='Password'
+            className="form-control"
+            name='password'
+            value={formData.password}
+            onChange={(e) => {
+              setFormData({ ...formData, password: e.target.value })
+            }}
+          />
         </div>
         <div>
-          <input type="password" placeholder='Confirm Password' className="form-control" />
+          <input
+            type="password"
+            placeholder='Confirm Password'
+            className="form-control"
+            name='confirm-password'
+            value={formData.confirmPassword}
+            onChange={(e) => {
+              setFormData({ ...formData, confirmPassword: e.target.value })
+            }}
+          />
         </div>
         <button className="btn" type='submit'>sign up</button>
       </form>
