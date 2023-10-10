@@ -5,16 +5,21 @@ import Login from './pages/Login'
 import Error from './pages/Error'
 import Sidebar from './components/Sidebar'
 import Register from './pages/Register'
+import PrivateRoute from './pages/PrivateRoute'
 
 const App = () => {
   return (
     <BrowserRouter>
       <Sidebar />
       <Routes>
-        <Route path='/' element={ <Home />} />
-        <Route path='/login' element={ <Login />} />
-        <Route path='/register' element={ <Register />} />
-        <Route path='*' element={ <Error />} />
+        <Route path='/' element={
+          <PrivateRoute>
+            <Home />
+          </PrivateRoute>
+        } />
+        <Route path='/login' element={<Login />} />
+        <Route path='/register' element={<Register />} />
+        <Route path='*' element={<Error />} />
       </Routes>
     </BrowserRouter>
   )
