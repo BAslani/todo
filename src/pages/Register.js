@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import styled from 'styled-components'
+import { useGlobal } from '../context/context'
 
 
 const Register = () => {
+  const { user, setUser } = useGlobal()
   const navigate = useNavigate()
   const [formData, setFormData] = useState({
     username: '',
@@ -28,7 +30,12 @@ const Register = () => {
       });
 
       if (response.status === 200) {
-        alert('Registration successful');
+        const data = await response.json();
+        setUser({
+          ...user,
+          id: data.id,
+          username: data.username
+        })
         navigate('/')
       } else {
         alert('Registration failed');
