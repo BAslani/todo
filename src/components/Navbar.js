@@ -2,13 +2,15 @@ import React from 'react'
 import styled from 'styled-components'
 import { BsPersonCircle } from 'react-icons/bs'
 import { TbLogout } from 'react-icons/tb'
+import { useGlobal } from '../context/context'
 
 const Navbar = () => {
+  const {user} = useGlobal()
   return (
     <Wrapper>
       <div className="user">
         <BsPersonCircle className='avatar' />
-        <h5>username</h5>
+        <h5>{user.username}</h5>
       </div>
       <button className="logout-btn">
         <TbLogout />
