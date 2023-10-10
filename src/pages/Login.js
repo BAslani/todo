@@ -23,8 +23,8 @@ const Login = () => {
         body: JSON.stringify(loginData),
       });
 
+      const data = await response.json();
       if (response.status === 200) {
-        const data = await response.json();
         setUser({
           ...user,
           id: data.id,
@@ -32,7 +32,7 @@ const Login = () => {
         })
         navigate('/')
       } else {
-        alert('login failed')
+        alert(data.message)
       }
     } catch (error) {
       console.error('Error:', error);
@@ -75,7 +75,11 @@ const Login = () => {
             }}
           />
         </div>
-        <button className="btn" type='submit'>Login</button>
+        <button
+          className="btn"
+          type='submit'
+          disabled={!loginData.username || !loginData.password}
+        >Login</button>
       </form>
       <div className='redirect'>
         <h5>If you don't have an account</h5>
@@ -121,6 +125,11 @@ form {
 .redirect {
   margin-top: 3rem;
   text-align: center;
+}
+.btn:disabled {
+  background: grey;
+  cursor: default;
+  color: #fff;;
 }
 `
 
