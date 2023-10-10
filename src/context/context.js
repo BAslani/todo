@@ -7,10 +7,11 @@ const TodoProvider = ({ children }) => {
     const [tasks, setTasks] = useState(mockData)
     const [isSidebarOpen, setIsSidebarOpen] = useState(false)
     const [isModalOpen, setIsModalOpen] = useState(false)
-
-    const handleSubmit = (e) => {
-        e.preventDefault();
-    }
+    const [user, setUser] = useState({
+        id: null,
+        username: '',
+        tasks: []
+    })
 
     return <todoContext.Provider value={{
         tasks,
@@ -18,7 +19,8 @@ const TodoProvider = ({ children }) => {
         setIsSidebarOpen,
         isModalOpen,
         setIsModalOpen,
-        handleSubmit
+        user,
+        setUser
     }}>
         {children}
     </todoContext.Provider>

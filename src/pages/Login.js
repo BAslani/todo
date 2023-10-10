@@ -1,11 +1,43 @@
-import React from 'react'
+import React, { useState } from 'react'
 import styled from 'styled-components'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
+import { useGlobal } from '../context/context'
 
 
 const Login = () => {
-  const handleSubmit = (e) => {
+  const navigate = useNavigate()
+  const { user, setUser } = useGlobal()
+  const [loginData, setLoginData] = useState({
+    username: '',
+    password: ''
+  })
+  const handleSubmit = async (e) => {
     e.preventDefault()
+
+    try {
+      const response = await fetch('http://127.0.0.1:5000/login', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(loginData),
+      });
+
+      if (response.status === 200) {
+        const data = await response.json();
+        setUser({
+          ...user,
+          id: data.id,
+          username: data.username
+        })
+        navigate('/')
+      } else {
+        alert('login failed')
+      }
+    } catch (error) {
+      console.error('Error:', error);
+      alert('An error occurred');
+    }
   }
   return (
     <Wrapper>
@@ -20,10 +52,28 @@ const Login = () => {
       </header>
       <form onSubmit={handleSubmit}>
         <div>
-          <input type="text" placeholder='Username' className="form-control" />
+          <input
+            type="text"
+            placeholder='Username'
+            className="form-control"
+            name='username'
+            value={loginData.username}
+            onChange={(e) => {
+              setLoginData({ ...loginData, username: e.target.value })
+            }}
+          />
         </div>
         <div>
-          <input type="password" placeholder='password' className="form-control" />
+          <input
+            type="password"
+            placeholder='password'
+            className="form-control"
+            name='password'
+            value={loginData.password}
+            onChange={(e) => {
+              setLoginData({ ...loginData, password: e.target.value })
+            }}
+          />
         </div>
         <button className="btn" type='submit'>Login</button>
       </form>

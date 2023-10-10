@@ -17,15 +17,46 @@ def index():
 @app.route("/register", methods=["POST"])
 def register():
     data = request.get_json()
-    username = data.get('username')
-    password = data.get('password')
+    username = data.get("username")
+    password = data.get("password")
 
     registered = db.execute("SELECT * FROM users WHERE username = ?", username)
 
     if len(registered) != 0:
-        return jsonify({'message': 'Username already taken'}), 400
+        return jsonify({"message": "Username already taken"}), 400
 
     hashed_password = generate_password_hash(password)
-    db.execute("INSERT INTO users (username, hash) VALUES (?, ?)", username, hashed_password)
+    user_id = db.execute(
+        "INSERT INTO users (username, hash) VALUES (?, ?)", username, hashed_password
+    )
 
-    return jsonify({'message': 'Registration successful'}), 200
+    return (
+        jsonify(
+            {"message": "Registration successful", "id": user_id, "username": username}
+        ),
+        200,
+    )
+
+
+@app.route("/login", methods=["POST"])
+def login():
+    data = request.get_json()
+    username = data.get("username")
+    password = data.get("password")
+
+    registered = db.execute("SELECT * FROM users WHERE username = ?", username)
+
+    if len(registered) != 1:
+        return jsonify({"message": "Invalid username"}), 400
+
+    original_password = registered[0]["hash"]
+
+    if not check_password_hash(original_password, password):
+        print("this is running")
+        return jsonify({"message": "Invalid password"}), 400
+
+    user_id = registered[0]["id"]
+    return (
+        jsonify({"message": "login successful", "id": user_id, "username": username}),
+        200,
+    )
