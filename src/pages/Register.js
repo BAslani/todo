@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { useNavigate } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import styled from 'styled-components'
 import { useGlobal } from '../context/context'
 
@@ -29,8 +29,8 @@ const Register = () => {
         body: JSON.stringify(formData),
       });
 
+      const data = await response.json();
       if (response.status === 200) {
-        const data = await response.json();
         setUser({
           ...user,
           id: data.id,
@@ -38,7 +38,7 @@ const Register = () => {
         })
         navigate('/')
       } else {
-        alert('Registration failed');
+        alert(data.message);
       }
     } catch (error) {
       console.error('Error:', error);
@@ -93,8 +93,13 @@ const Register = () => {
             }}
           />
         </div>
-        <button className="btn" type='submit'>sign up</button>
+        <button
+          className="btn"
+          type='submit'
+          disabled={!formData.username || !formData.password || !formData.confirmPassword}
+        >sign up</button>
       </form>
+      <p className='login'>if you have an account <span><Link to='/login'>Login</Link></span> here</p>
     </Wrapper>
   )
 }
@@ -129,6 +134,19 @@ form {
 .btn {
   border-radius: 0.75rem;
   padding: 0.75rem 2rem;
+}
+.btn:disabled {
+  background: grey;
+  cursor: default;
+  color: #fff;;
+}
+.login {
+  margin-top: 1rem;
+  text-align: center;
+}}
+.login span{
+  font-size: 1.25rem;
+  font-weight: 500;
 }
 `
 

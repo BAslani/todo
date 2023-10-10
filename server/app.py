@@ -53,7 +53,7 @@ def login():
 
     if not check_password_hash(original_password, password):
         print("this is running")
-        return jsonify({"message": "Invalid password"}), 400
+        return jsonify({"message": "Invalid password"}), 401
 
     user_id = registered[0]["id"]
     return (
