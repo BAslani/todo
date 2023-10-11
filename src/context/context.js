@@ -7,11 +7,10 @@ const TodoProvider = ({ children }) => {
     const [tasks, setTasks] = useState(mockData)
     const [isSidebarOpen, setIsSidebarOpen] = useState(false)
     const [isModalOpen, setIsModalOpen] = useState(false)
-    const [user, setUser] = useState({
-        id: null,
-        username: '',
-        tasks: []
-    })
+    const [user, setUser] = useState(() => {
+        const userData = localStorage.getItem('user');
+        return userData ? JSON.parse(userData) : { id: null, username: '', tasks: [] };
+      });
 
     return <todoContext.Provider value={{
         tasks,

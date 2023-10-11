@@ -31,6 +31,7 @@ const Register = () => {
 
       const data = await response.json();
       if (response.status === 200) {
+        localStorage.setItem('user', JSON.stringify(data));
         setUser({
           ...user,
           id: data.id,

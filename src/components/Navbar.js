@@ -22,7 +22,8 @@ const Navbar = () => {
           username: '',
           tasks: []
         });
-        navigate('login')
+        localStorage.clear()
+        navigate('/login')
       }}
       >
         <TbLogout />
