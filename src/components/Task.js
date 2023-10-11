@@ -1,8 +1,9 @@
-import React from 'react'
+import React, { useState } from 'react'
 import styled from 'styled-components'
-import { BiEditAlt, BiCheckbox } from 'react-icons/bi'
+import { BiEditAlt, BiCheckbox, BiCheckSquare } from 'react-icons/bi'
 
 const Task = ({ id, desc, date, type }) => {
+  const [fulfilled, setFulfilled] = useState(false)
   return (
     <Wrapper>
       <span className={`dot ${type}`}></span>
@@ -10,11 +11,15 @@ const Task = ({ id, desc, date, type }) => {
         {desc}
       </h5>
       <div className="btn-container">
-        <button type="button" className='edit-btn' >
+        <button type="button" className='task-btn edit-btn' >
           <BiEditAlt />
         </button>
-        <button type="button" className='check-btn' >
-          <BiCheckbox />
+        <button
+        type="button"
+        className={`task-btn check-btn ${fulfilled && 'checked'}`}
+        onClick={()=>setFulfilled(!fulfilled)}
+        >
+          {fulfilled ? <BiCheckSquare /> : <BiCheckbox />}
         </button>
       </div>
     </Wrapper>
@@ -30,7 +35,6 @@ height: 3rem;
 box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
 display: grid;
 grid-template-columns: auto 1fr auto;
-align-content: center;
 
 h5 {
   margin: auto 0;
@@ -61,6 +65,9 @@ h5 {
 .btn-container {
   display: flex;
 }
+.task-btn {
+  cursor: pointer;
+}
 .edit-btn {
   background: transparent;
   border: none;
@@ -72,6 +79,10 @@ h5 {
   border: none;
   font-size: 2rem;
   color: #747474;
+}
+.checked {
+  color: #4caf50;
+  font-size: 1.75rem;
 }
 `
 
