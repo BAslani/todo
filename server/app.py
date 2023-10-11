@@ -60,3 +60,27 @@ def login():
         jsonify({"message": "login successful", "id": user_id, "username": username}),
         200,
     )
+
+
+@app.route("/addTask", methods=["POST"])
+def addTask():
+    data = request.get_json()
+    user_id = data.get("id")
+    desc = data.get("desc")
+    date = data.get("date")
+    type = data.get("type")
+    state = "todo"
+
+    db.execute(
+        "INSERT INTO tasks (id, desc, date, type, state) VALUES (?, ?, ?, ?, ?)",
+        user_id,
+        desc,
+        date,
+        type,
+        state,
+    )
+    return jsonify({"message": "Task added successfully"}), 200
+
+
+# @app.route("/tasks")
+# def tasks():

@@ -2,15 +2,29 @@ import styled from "styled-components";
 import { useGlobal } from "../context/context";
 
 const Modal = () => {
-    const { setIsModalOpen, handleSubmit } = useGlobal();
-
+    const { setIsModalOpen, handleAddTask, taskInfo, setTaskInfo } = useGlobal();
     return (
         <Wrapper>
             <div className='modal'>
-                <form onSubmit={handleSubmit}>
-                    <input type="text" name="desc" placeholder='Task' />
-                    <input type="date" name="date" />
-                    <select name="type" defaultValue="title">
+                <form onSubmit={handleAddTask}>
+                    <input
+                    type="text"
+                    name="desc"
+                    placeholder='Task'
+                    value={taskInfo.desc}
+                    onChange={(e)=>setTaskInfo({...taskInfo, desc: e.target.value})}
+                    />
+                    <input
+                    type="date"
+                    name="date"
+                    value={taskInfo.date}
+                    onChange={(e)=>setTaskInfo({...taskInfo, date: e.target.value})}
+                    />
+                    <select
+                    name="type"
+                    defaultValue="title"
+                    onChange={(e)=>setTaskInfo({...taskInfo, type: e.target.value})}
+                    >
                         <option disabled value="title">Type</option>
                         <option value="event">Event</option>
                         <option value="work">Work</option>
