@@ -32,7 +32,6 @@ const TodoProvider = ({ children }) => {
             });
             const data = await response.json()
             if (response.status === 200) {
-                alert(data.message)
                 setIsModalOpen(false)
             }
         } catch (error) {
