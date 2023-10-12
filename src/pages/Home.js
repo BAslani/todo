@@ -33,7 +33,7 @@ const Home = () => {
           </div>
           {
             tasks.map((task) => {
-              return <Task key={task.id} {...task} />
+              return <Task key={task.idx} {...task} />
             })
           }
         </section>

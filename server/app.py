@@ -82,5 +82,14 @@ def addTask():
     return jsonify({"message": "Task added successfully"}), 200
 
 
-# @app.route("/tasks")
-# def tasks():
+@app.route("/tasks", methods=["POST"])
+def tasks():
+    data = request.get_json()
+    user_id = data.get("id")
+
+    todoList = db.execute("SELECT * FROM tasks WHERE id = ?", user_id)
+
+    return jsonify({
+        'message': 'success',
+        'tasks': todoList
+    }), 200

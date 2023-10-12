@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import styled from 'styled-components'
 import { BiEditAlt, BiCheckbox, BiCheckSquare } from 'react-icons/bi'
 
-const Task = ({ id, desc, date, type }) => {
+const Task = ({ id, desc, date, type, idx }) => {
   const [fulfilled, setFulfilled] = useState(false)
   return (
     <Wrapper>
