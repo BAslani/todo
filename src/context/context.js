@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 
 const todoContext = React.createContext();
 
@@ -30,7 +30,7 @@ const TodoProvider = ({ children }) => {
                     id: user.id
                 })
             });
-            const data = await response.json()
+
             if (response.status === 200) {
                 setIsModalOpen(false)
             }
@@ -40,7 +40,7 @@ const TodoProvider = ({ children }) => {
     }
 
 
-    const fetchData = async () => {
+    const fetchData = useCallback (async () => {
         try {
             const response = await fetch("http://127.0.0.1:5000/tasks", {
                 method: "POST",
@@ -56,10 +56,11 @@ const TodoProvider = ({ children }) => {
         } catch (error) {
             console.log(error);
         }
-    }
+    },[isModalOpen])
+
     useEffect(() => {
         fetchData()
-    }, [tasks])
+    }, [fetchData])
 
     return <todoContext.Provider value={{
         tasks,
