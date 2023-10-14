@@ -1,9 +1,11 @@
-import React, { useState } from 'react'
+import React, { useEffect } from 'react'
 import styled from 'styled-components'
 import { BiEditAlt, BiCheckbox, BiCheckSquare } from 'react-icons/bi'
+import { useGlobal } from '../context/context'
 
-const Task = ({ id, desc, date, type, idx }) => {
-  const [fulfilled, setFulfilled] = useState(false)
+const Task = ({ id, desc, date, type, idx, state }) => {
+  const { handleTaskState } = useGlobal()
+
   return (
     <Wrapper>
       <span className={`dot ${type}`}></span>
@@ -15,11 +17,13 @@ const Task = ({ id, desc, date, type, idx }) => {
           <BiEditAlt />
         </button>
         <button
-        type="button"
-        className={`task-btn check-btn ${fulfilled && 'checked'}`}
-        onClick={()=>setFulfilled(!fulfilled)}
+          type="button"
+          className={`task-btn check-btn`}
+          onClick={() => {
+            handleTaskState(id, idx, state)
+          }}
         >
-          {fulfilled ? <BiCheckSquare /> : <BiCheckbox />}
+          <BiCheckbox />
         </button>
       </div>
     </Wrapper>
@@ -79,10 +83,6 @@ h5 {
   border: none;
   font-size: 2rem;
   color: #747474;
-}
-.checked {
-  color: #4caf50;
-  font-size: 1.75rem;
 }
 `
 

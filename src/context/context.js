@@ -16,7 +16,7 @@ const TodoProvider = ({ children }) => {
         type: ''
     })
 
-
+    // Adding tasks functionallity
     const handleAddTask = async (e) => {
         e.preventDefault();
         try {
@@ -39,8 +39,8 @@ const TodoProvider = ({ children }) => {
         }
     }
 
-
-    const fetchData = useCallback (async () => {
+    // fetching tasks from the server
+    const fetchData = useCallback(async () => {
         try {
             const response = await fetch("http://127.0.0.1:5000/tasks", {
                 method: "POST",
@@ -56,12 +56,40 @@ const TodoProvider = ({ children }) => {
         } catch (error) {
             console.log(error);
         }
-    },[isModalOpen])
+    }, [isModalOpen])
 
     useEffect(() => {
         fetchData()
     }, [fetchData])
 
+    // changing tasks state
+    const handleTaskState = async (id, idx, state) => {
+        try {
+            const response = await fetch("http://127.0.0.1:5000/taskState", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({ id: id, idx: idx, state: state })
+            })
+            if (response.status === 200) {
+                setTasks(tasks.map(task => {
+                    if (task.id === id && task.idx === idx) {
+                        if (task.state === 'todo') {
+                            task.state = 'done'
+                        } else {
+                            task.state = 'todo'
+                        }
+                        return task
+                    }
+                    return task
+                }))
+                console.log('task updated');
+            }
+        } catch (error) {
+            console.log(error);
+        }
+    }
     return <todoContext.Provider value={{
         tasks,
         isSidebarOpen,
@@ -72,7 +100,8 @@ const TodoProvider = ({ children }) => {
         setUser,
         handleAddTask,
         taskInfo,
-        setTaskInfo
+        setTaskInfo,
+        handleTaskState
     }}>
         {children}
     </todoContext.Provider>

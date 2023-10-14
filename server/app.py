@@ -93,3 +93,21 @@ def tasks():
         'message': 'success',
         'tasks': todoList
     }), 200
+
+
+@app.route("/taskState", methods=["POST"])
+def taskState():
+    data = request.get_json()
+    user_id = data.get("id")
+    task_idx = data.get("idx")
+    task_state = data.get("state")
+
+    if task_state == 'todo':
+        db.execute("UPDATE tasks SET state = 'done' WHERE id = ? AND idx = ?", user_id, task_idx)
+    else:
+        db.execute("UPDATE tasks SET state = 'todo' WHERE id = ? AND idx = ?", user_id, task_idx)
+
+    return jsonify({
+        'message': 'state changed successfully'
+    }), 200
+
