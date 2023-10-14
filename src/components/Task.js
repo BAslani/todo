@@ -23,7 +23,7 @@ const Task = ({ id, desc, date, type, idx, state }) => {
             handleTaskState(id, idx, state)
           }}
         >
-          <BiCheckbox />
+          {state === 'done' ? <BiCheckSquare className='checked' /> : <BiCheckbox />}
         </button>
       </div>
     </Wrapper>
@@ -83,6 +83,9 @@ h5 {
   border: none;
   font-size: 2rem;
   color: #747474;
+}
+.checked {
+  color: #4caf50;
 }
 `
 
