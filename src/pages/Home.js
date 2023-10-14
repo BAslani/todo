@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import Navbar from '../components/Navbar'
 import Task from '../components/Task'
 import styled from 'styled-components'
@@ -6,9 +6,14 @@ import { useGlobal } from '../context/context'
 import { BsFillPlusCircleFill, BsSortDownAlt } from 'react-icons/bs'
 import Modal from '../components/Modal'
 import Stats from '../components/Stats'
+import Filters from '../components/Filters'
 
 const Home = () => {
   const { tasks, isModalOpen, setIsModalOpen, setIsSidebarOpen } = useGlobal()
+  const [filteredTasks, setFilteredTasks] = useState([])
+  useEffect(() => {
+    setFilteredTasks(tasks)
+  }, [tasks])
   return (
     <Wrapper>
       {isModalOpen && <Modal />}
@@ -16,23 +21,10 @@ const Home = () => {
       <div className="main">
         <section className='tasks-container'>
           <div className="filters">
-            <ul>
-              <li>
-                <button type="button" className="btn sidebar-btn">Events</button>
-              </li>
-              <li>
-                <button type="button" className="btn sidebar-btn">Work</button>
-              </li>
-              <li>
-                <button type="button" className="btn sidebar-btn">Educations</button>
-              </li>
-              <li>
-                <button type="button" className="btn sidebar-btn">Chores</button>
-              </li>
-            </ul>
+            <Filters />
           </div>
           {
-            tasks.map((task) => {
+            filteredTasks.map((task) => {
               return <Task key={task.idx} {...task} />
             })
           }
@@ -93,6 +85,25 @@ grid-template-rows: auto 1fr auto;
 }
 
 @media (min-width: 992px) {
+  .filters button {
+    text-transform: uppercase;
+    background: var(--clr-primary-5);
+    color: var(--clr-primary-10);
+    padding: 0.375rem 0.75rem;
+    letter-spacing: var(--spacing);
+    display: inline-block;
+    font-weight: 400;
+    transition: var(--transition);
+    font-size: 0.875rem;
+    cursor: pointer;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+    border-radius: var(--radius);
+    border-color: transparent;
+  }
+  .filters button:hover {
+    color: var(--clr-primary-1);
+    background: var(--clr-primary-7);
+  }
 
   .main {
    display: grid;
@@ -129,7 +140,7 @@ grid-template-rows: auto 1fr auto;
       display: flex;
       justify-content: center;
       li {
-        margin-right: 1.5rem;
+        margin-right: 1rem;
       }
     }
   }

@@ -2,6 +2,7 @@ import React from 'react'
 import { FaTimes } from 'react-icons/fa'
 import styled from 'styled-components'
 import { useGlobal } from '../context/context'
+import Filters from './Filters'
 
 const Sidebar = () => {
   const { isSidebarOpen, setIsSidebarOpen } = useGlobal()
@@ -14,20 +15,7 @@ const Sidebar = () => {
         </button>
       </div>
       <h3>Filter by :</h3>
-      <ul className="links">
-        <li>
-          <button type="button" className="sidebar-btn">Events</button>
-        </li>
-        <li>
-          <button type="button" className="sidebar-btn">Work</button>
-        </li>
-        <li>
-          <button type="button" className="sidebar-btn">Educations</button>
-        </li>
-        <li>
-          <button type="button" className="sidebar-btn">Chores</button>
-        </li>
-      </ul>
+      <Filters />
     </aside>
   </SidebarContainer>
 }
