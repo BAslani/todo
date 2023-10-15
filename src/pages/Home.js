@@ -9,11 +9,8 @@ import Stats from '../components/Stats'
 import Filters from '../components/Filters'
 
 const Home = () => {
-  const { tasks, isModalOpen, setIsModalOpen, setIsSidebarOpen } = useGlobal()
-  const [filteredTasks, setFilteredTasks] = useState([])
-  useEffect(() => {
-    setFilteredTasks(tasks)
-  }, [tasks])
+  const { filteredTasks, isModalOpen, setIsModalOpen, setIsSidebarOpen } = useGlobal()
+
   return (
     <Wrapper>
       {isModalOpen && <Modal />}
