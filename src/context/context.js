@@ -15,6 +15,11 @@ const TodoProvider = ({ children }) => {
         date: '',
         type: ''
     })
+    const [filteredTasks, setFilteredTasks] = useState([])
+
+    useEffect(() => {
+        setFilteredTasks(tasks)
+      }, [tasks])
 
     // Adding tasks functionallity
     const handleAddTask = async (e) => {
@@ -84,12 +89,25 @@ const TodoProvider = ({ children }) => {
                     }
                     return task
                 }))
-                console.log('task updated');
             }
         } catch (error) {
             console.log(error);
         }
     }
+
+
+    // filtering tasks
+    const handleFilter = (e) => {
+        setIsSidebarOpen(false)
+        const category = e.target.name;
+        if (category === 'all') {
+            setFilteredTasks(tasks)
+        } else {
+            const newTasks = tasks.filter((task) => task.type === category)
+            setFilteredTasks(newTasks)
+        }
+    }
+
     return <todoContext.Provider value={{
         tasks,
         isSidebarOpen,
@@ -101,7 +119,9 @@ const TodoProvider = ({ children }) => {
         handleAddTask,
         taskInfo,
         setTaskInfo,
-        handleTaskState
+        handleTaskState,
+        filteredTasks,
+        handleFilter
     }}>
         {children}
     </todoContext.Provider>

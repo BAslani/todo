@@ -33,9 +33,10 @@ const Task = ({ id, desc, date, type, idx, state }) => {
 const Wrapper = styled.article`
 width: 80%;
 margin: 1rem auto;
+padding: 0.5rem 0;
 background: #fff;
 border-radius: 1rem;
-height: 3rem;
+min-height: 3rem;
 box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
 display: grid;
 grid-template-columns: auto 1fr auto;
