@@ -1,6 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
-import { BiEditAlt, BiCheckbox, BiCheckSquare } from 'react-icons/bi'
+import { BiCheckbox, BiCheckSquare } from 'react-icons/bi'
+import { GoTrash } from 'react-icons/go'
 import { useGlobal } from '../context/context'
 
 const Task = ({ id, desc, date, type, idx, state }) => {
@@ -13,8 +14,8 @@ const Task = ({ id, desc, date, type, idx, state }) => {
         {desc}
       </h5>
       <div className="btn-container">
-        <button type="button" className='task-btn edit-btn' >
-          <BiEditAlt />
+        <button type="button" className='task-btn delete-btn' >
+          <GoTrash />
         </button>
         <button
           type="button"
@@ -73,11 +74,12 @@ h5 {
 .task-btn {
   cursor: pointer;
 }
-.edit-btn {
+.delete-btn {
   background: transparent;
   border: none;
-  font-size: 1.5rem;
-  color: #747474;
+  font-size: 1.25rem;
+  margin-right: 0.25rem;
+  color: #bb2525;
 }
 .check-btn {
   background: transparent;
