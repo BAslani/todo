@@ -82,6 +82,19 @@ def addTask():
     return jsonify({"message": "Task added successfully"}), 200
 
 
+@app.route("/deleteTask", methods=["POST"])
+def deleteTask():
+    data = request.get_json()
+    user_id = data.get("id")
+    task_idx = data.get("idx")
+
+    db.execute("DELETE FROM tasks WHERE id = ? AND idx = ?", user_id, task_idx)
+
+    return jsonify({
+        'message': 'task deleted successfull'
+    }), 200
+
+
 @app.route("/tasks", methods=["POST"])
 def tasks():
     data = request.get_json()

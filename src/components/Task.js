@@ -5,7 +5,7 @@ import { GoTrash } from 'react-icons/go'
 import { useGlobal } from '../context/context'
 
 const Task = ({ id, desc, date, type, idx, state }) => {
-  const { handleTaskState } = useGlobal()
+  const { handleTaskState, handleDelete } = useGlobal()
 
   return (
     <Wrapper>
@@ -14,7 +14,11 @@ const Task = ({ id, desc, date, type, idx, state }) => {
         {desc}
       </h5>
       <div className="btn-container">
-        <button type="button" className='task-btn delete-btn' >
+        <button
+          type="button"
+          className='task-btn delete-btn'
+          onClick={() => handleDelete(id, idx)}
+        >
           <GoTrash />
         </button>
         <button
