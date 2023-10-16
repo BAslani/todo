@@ -4,9 +4,8 @@ import { BiCheckbox, BiCheckSquare } from 'react-icons/bi'
 import { GoTrash } from 'react-icons/go'
 import { useGlobal } from '../context/context'
 
-const Task = ({ id, desc, date, type, idx, state }) => {
+const Task = ({ id, desc, type, idx, state }) => {
   const { handleTaskState, handleDelete } = useGlobal()
-
   return (
     <Wrapper>
       <span className={`dot ${type}`}></span>

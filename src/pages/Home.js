@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import Navbar from '../components/Navbar'
 import Task from '../components/Task'
 import styled from 'styled-components'
@@ -10,7 +10,13 @@ import Filters from '../components/Filters'
 
 const Home = () => {
   const { filteredTasks, isModalOpen, setIsModalOpen, setIsSidebarOpen } = useGlobal()
+  filteredTasks.sort((a,b) => (a.date > b.date) ? 1 : -1)
+  let newDate = new Date()
+  let today = `${newDate.getFullYear()}-${newDate.getMonth() + 1}-${newDate.getDate()}`
+  let tomorrow = `${newDate.getFullYear()}-${newDate.getMonth() + 1}-${newDate.getDate() + 1}`
 
+  const [pastTasks, setPastTasks] = useState(false)
+  const prevTasks = filteredTasks.filter((task) => task.date < today)
   return (
     <Wrapper>
       {isModalOpen && <Modal />}
@@ -20,9 +26,40 @@ const Home = () => {
           <div className="filters">
             <Filters />
           </div>
+          <button className="btn togglePast" onClick={() => setPastTasks(!pastTasks)}>{
+            pastTasks ? 'Hide previous tasks' :
+            'Show previous tasks'
+          }</button>
+          {pastTasks &&
+            prevTasks.map((task) => {
+              return <Task key={task.idx} {...task} />
+            })
+          }
+          <h4 className='day'>today</h4>
           {
             filteredTasks.map((task) => {
-              return <Task key={task.idx} {...task} />
+              if (task.date === today) {
+                return <Task key={task.idx} {...task} />
+              }
+              return
+            })
+          }
+          <h4 className='day'>tomorrow</h4>
+          {
+            filteredTasks.map((task) => {
+              if (task.date === tomorrow) {
+                return <Task key={task.idx} {...task} />
+              }
+              return
+            })
+          }
+          <h4 className='day'>next</h4>
+          {
+            filteredTasks.map((task) => {
+              if (task.date > tomorrow) {
+                return <Task key={task.idx} {...task} />
+              }
+              return
             })
           }
         </section>
@@ -53,6 +90,17 @@ grid-template-rows: auto 1fr auto;
 }
 .filters {
   display: none;
+}
+.day {
+  margin-top: 2rem;
+  margin-left: 2rem;
+}
+.togglePast {
+  display: block;
+  margin-left: 2.5rem;
+  margin-top: 1.5rem;
+  background: #fff;
+  color: #222;
 }
 .stats {
   display: none;
@@ -108,6 +156,12 @@ grid-template-rows: auto 1fr auto;
   }
   .tasks-container {
     overflow-x: scroll;
+  }
+  .togglePast {
+    margin-left: 5rem;
+  }
+  .day {
+    margin-left: 4rem;
   }
   .stats {
     display: block;
