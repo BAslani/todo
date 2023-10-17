@@ -52,7 +52,6 @@ def login():
     original_password = registered[0]["hash"]
 
     if not check_password_hash(original_password, password):
-        print("this is running")
         return jsonify({"message": "Invalid password"}), 401
 
     user_id = registered[0]["id"]
@@ -70,6 +69,11 @@ def addTask():
     date = data.get("date")
     type = data.get("type")
     state = "todo"
+
+    if type not in ['event', 'education', 'work', 'chores']:
+        return jsonify({
+            'message': 'invalid input'
+        }), 400
 
     db.execute(
         "INSERT INTO tasks (id, desc, date, type, state) VALUES (?, ?, ?, ?, ?)",
