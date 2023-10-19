@@ -34,20 +34,21 @@ const Stats = ({ tasks }) => {
             const data = await response.json();
             if (response.status === 200) {
                 setEventTasks({
-                    ...eventTasks,
-                    done: data.eventsDone
+                    done: data.eventsDone,
+                    failed: data.eventsFailed
                 })
                 setworkTasks({
-                    ...workTasks,
-                    done: data.worksDone
+                    done: data.worksDone,
+                    failed: data.worksFailed
+
                 })
                 seteducationTasks({
-                    ...educationTasks,
-                    done: data.educationsDone
+                    done: data.educationsDone,
+                    failed: data.educationsFailed
                 })
                 setchoreTasks({
-                    ...choreTasks,
-                    done: data.choresDone
+                    done: data.choresDone,
+                    failed: data.choresFailed
                 })
             }
         } catch (error) {
@@ -66,22 +67,22 @@ const Stats = ({ tasks }) => {
                 <div className="stat-container">
                     <h4>Events</h4>
                     <h5 className='success'>completed : <span>{eventTasks.done}</span></h5>
-                    <h5 className='fail'>Failed : <span>0</span></h5>
+                    <h5 className='fail'>Failed : <span>{eventTasks.failed}</span></h5>
                 </div>
                 <div className="stat-container">
                     <h4>Works</h4>
                     <h5 className='success'>completed : <span>{workTasks.done}</span></h5>
-                    <h5 className='fail'>Failed : <span>5</span></h5>
+                    <h5 className='fail'>Failed : <span>{workTasks.failed}</span></h5>
                 </div>
                 <div className="stat-container">
                     <h4>Educations</h4>
                     <h5 className='success'>completed : <span>{educationTasks.done}</span></h5>
-                    <h5 className='fail'>Failed : <span>5</span></h5>
+                    <h5 className='fail'>Failed : <span>{educationTasks.failed}</span></h5>
                 </div>
                 <div className="stat-container">
                     <h4>Chores</h4>
                     <h5 className='success'>completed : <span>{choreTasks.done}</span></h5>
-                    <h5 className='fail'>Failed : <span>5</span></h5>
+                    <h5 className='fail'>Failed : <span>{choreTasks.failed}</span></h5>
                 </div>
             </div>
         </Wrapper>

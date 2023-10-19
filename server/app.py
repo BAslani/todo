@@ -134,7 +134,6 @@ def taskState():
 def calculateStats():
     data = request.get_json()
     tasks = data.get("tasks")
-    today = datetime.now()
 
     eventsDone = 0
     eventsFailed = 0
@@ -157,18 +156,30 @@ def calculateStats():
                 choresDone += 1
 
         else:
+            today = datetime.now()
             y, m, d = task["date"].split('-')
             taskDate = datetime(int(y), int(m), int(d) + 1)
+
+            if today > taskDate:
+                if task["state"] == 'todo':
+                    if task["type"] == 'event':
+                        eventsFailed += 1
+                    if task["type"] == 'work':
+                        worksFailed += 1
+                    if task["type"] == 'education':
+                        educationsFailed += 1
+                    if task["type"] == 'chores':
+                        choresFailed += 1
 
 
     return jsonify({
         'message': 'stats sent successfully',
         'eventsDone': eventsDone,
-        'eventsFailed': 1,
+        'eventsFailed': eventsFailed,
         'worksDone': worksDone,
-        'worksFailed': 1,
+        'worksFailed': worksFailed,
         'educationsDone': educationsDone,
-        'educationsFailed': 1,
+        'educationsFailed': educationsFailed,
         'choresDone': choresDone,
-        'choresFailed': 1,
+        'choresFailed': choresFailed,
     }), 200
