@@ -1,7 +1,7 @@
-import React, { useEffect, useState } from 'react'
+import React, { useCallback, useEffect, useState } from 'react'
 import styled from 'styled-components'
 
-const Stats = ({tasks}) => {
+const Stats = ({ tasks }) => {
     const [eventTasks, setEventTasks] = useState({
         done: 0,
         failed: 0
@@ -19,41 +19,45 @@ const Stats = ({tasks}) => {
         failed: 0
     })
 
-    const fetchStats = async () => {
-        const response = await fetch("http://127.0.0.1:5000/calculateStats", {
-            method: "POST",
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({
-                'message': 'get stats',
-                'tasks': tasks
+    const fetchStats = useCallback(async () => {
+        try {
+            const response = await fetch("http://127.0.0.1:5000/calculateStats", {
+                method: "POST",
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    'message': 'get stats',
+                    'tasks': tasks
+                })
             })
-        })
-        const data = await response.json();
-        if (response.status === 200) {
-            setEventTasks({
-                ...eventTasks,
-                done: data.eventsDone
-            })
-            setworkTasks({
-                ...workTasks,
-                done: data.worksDone
-            })
-            seteducationTasks({
-                ...educationTasks,
-                done: data.educationsDone
-            })
-            setchoreTasks({
-                ...choreTasks,
-                done: data.choresDone
-            })
+            const data = await response.json();
+            if (response.status === 200) {
+                setEventTasks({
+                    ...eventTasks,
+                    done: data.eventsDone
+                })
+                setworkTasks({
+                    ...workTasks,
+                    done: data.worksDone
+                })
+                seteducationTasks({
+                    ...educationTasks,
+                    done: data.educationsDone
+                })
+                setchoreTasks({
+                    ...choreTasks,
+                    done: data.choresDone
+                })
+            }
+        } catch (error) {
+            console.log(error);
         }
-    }
+    },[tasks])
 
     useEffect(() => {
         fetchStats()
-    },[tasks])
+    }, [tasks,fetchStats])
 
     return (
         <Wrapper>
