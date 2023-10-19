@@ -2,6 +2,7 @@ from flask import Flask, jsonify, request
 from flask_cors import CORS
 from cs50 import SQL
 from werkzeug.security import check_password_hash, generate_password_hash
+from datetime import datetime
 
 app = Flask(__name__)
 CORS(app)
@@ -128,3 +129,46 @@ def taskState():
         'message': 'state changed successfully'
     }), 200
 
+
+@app.route("/calculateStats", methods=["POST"])
+def calculateStats():
+    data = request.get_json()
+    tasks = data.get("tasks")
+    today = datetime.now()
+
+    eventsDone = 0
+    eventsFailed = 0
+    worksDone = 0
+    worksFailed = 0
+    educationsDone = 0
+    educationsFailed = 0
+    choresDone = 0
+    choresFailed = 0
+
+    for task in tasks:
+        if task["state"] == 'done':
+            if task["type"] == 'event':
+                eventsDone += 1
+            if task["type"] == 'work':
+                worksDone += 1
+            if task["type"] == 'education':
+                educationsDone += 1
+            if task["type"] == 'chores':
+                choresDone += 1
+
+        else:
+            y, m, d = task["date"].split('-')
+            taskDate = datetime(int(y), int(m), int(d) + 1)
+
+
+    return jsonify({
+        'message': 'stats sent successfully',
+        'eventsDone': eventsDone,
+        'eventsFailed': 1,
+        'worksDone': worksDone,
+        'worksFailed': 1,
+        'educationsDone': educationsDone,
+        'educationsFailed': 1,
+        'choresDone': choresDone,
+        'choresFailed': 1,
+    }), 200

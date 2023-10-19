@@ -64,7 +64,7 @@ const Home = () => {
           }
         </section>
         <div className="stats">
-          <Stats />
+          <Stats tasks={filteredTasks}/>
         </div>
       </div>
       <section className="footer">
