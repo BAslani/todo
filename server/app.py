@@ -158,7 +158,11 @@ def calculateStats():
         else:
             today = datetime.now()
             y, m, d = task["date"].split('-')
-            taskDate = datetime(int(y), int(m), int(d) + 1)
+
+            try:
+                taskDate = datetime(int(y), int(m), int(d) + 1)
+            except ValueError:
+                taskDate = datetime(int(y), int(m) + 1, 1)
 
             if today > taskDate:
                 if task["state"] == 'todo':
