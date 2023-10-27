@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import styled from 'styled-components'
 import { useGlobal } from '../context/context'
@@ -107,7 +107,7 @@ const Register = () => {
 
 const Wrapper = styled.main`
 .container {
-  background: #3e9fbd;
+  background: var(--clr-primary-5);
   width: 10rem;
   margin: 5rem auto;
   margin-bottom: 1rem;

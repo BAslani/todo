@@ -116,7 +116,7 @@ grid-template-rows: auto 1fr auto;
   background: transparent;
   border: none;
   font-size: 5rem;
-  color: #3E9FBD;
+  color: var(--clr-primary-5);
   filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
   cursor: pointer;
 }
@@ -177,7 +177,6 @@ grid-template-rows: auto 1fr auto;
     background: transparent;
     border: none;
     font-size: 4rem;
-    color: #3E9FBD;
     filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
     cursor: pointer;
   }

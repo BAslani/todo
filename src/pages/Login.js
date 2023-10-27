@@ -94,7 +94,7 @@ const Login = () => {
 
 const Wrapper = styled.main`
 .container {
-  background: #3e9fbd;
+  background: var(--clr-primary-5);
   width: 10rem;
   margin: 5rem auto;
   margin-bottom: 1rem;
